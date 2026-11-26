@@ -1,0 +1,13 @@
+{
+  "name": "whisker-worlds",
+  "version": "0.1.0",
+  "description": "Whisker Worlds: a third-person cat adventure in Three.js",
+  "scripts": {
+    "start": "npx --yes http-server -p 8080 -c-1 ."
+  },
+  "license": "ISC",
+  "dependencies": {
+    "three": "^0.170.0"
+  },
+  "private": true
+}

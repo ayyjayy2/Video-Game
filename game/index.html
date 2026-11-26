@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#2f2638">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Whisker Worlds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.min.js" } }</script>
+</head>
+<body>
+<canvas id="view"></canvas>
+<div id="touchLayer"></div>
+<div id="darkness"></div>
+<div id="fade"></div>
+
+<div id="hud">
+  <div id="ports" data-btn="swap" title="Swap cats (Tab)">
+    <div class="port" id="pCapp"><img src="art/face-cappuccino.jpg" alt="Cappuccino"></div>
+    <div class="port" id="pAsher"><img src="art/face-asher.jpg" alt="Asher"></div>
+  </div>
+  <div id="notesRow" title="Notes recovered"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div id="topRight">
+    <span id="fishWrap"><svg viewBox="0 0 24 14" aria-hidden="true"><path d="M2 7c4-6 11-6 15 0-4 6-11 6-15 0zm15 0 5-5v10z" fill="#ff9f6b"/></svg><b id="treats">0</b></span>
+    <button id="mapBtn" class="icon" aria-label="Map">Map</button>
+    <button id="pauseBtn" class="icon" aria-label="Pause">II</button>
+  </div>
+  <div id="objective" hidden></div>
+  <div id="prompt" hidden></div>
+  <div id="toast" hidden></div>
+  <div id="charge" hidden><div id="chargeBar"></div></div>
+</div>
+
+<div id="touchUI">
+  <div id="joy"><div id="joyKnob"></div></div>
+  <button class="tbtn" id="jumpBtn" data-btn="jump">Jump</button>
+  <button class="tbtn" id="pawBtn" data-btn="paw">Paw</button>
+  <button class="tbtn" id="swapBtn" data-btn="swap">Swap</button>
+  <button class="tbtn" id="skillBtn" data-btn="skill" hidden><span id="skillName">Skill</span></button>
+  <button class="tbtn" id="cycleBtn" data-btn="cycle" hidden>&#8635;</button>
+</div>
+
+<div id="dialog" hidden>
+  <div class="dlgBox">
+    <img id="dlgFace" alt="">
+    <div id="dlgChip" hidden></div>
+    <div class="dlgBody"><b id="dlgName"></b><p id="dlgText"></p></div>
+    <span class="dlgNext">Tap, Space or E</span>
+  </div>
+</div>
+
+<div id="card" hidden>
+  <div id="cardArt"></div>
+  <div class="cardPanel">
+    <h2 id="cardTitle"></h2>
+    <p id="cardText"></p>
+    <button id="cardBtn" class="big">Continue</button>
+  </div>
+</div>
+
+<div id="loading" hidden>
+  <div id="loadArt"></div>
+  <div class="loadPanel"><h2 id="loadName"></h2><p id="loadTip"></p><div class="dots"><i></i><i></i><i></i></div></div>
+</div>
+
+<div id="title">
+  <div class="titleArt"></div>
+  <div class="titlePanel">
+    <h1>Whisker Worlds</h1>
+    <p class="sub">Cappuccino and Asher, a broken music box, and seven tiny worlds hidden in the furniture.</p>
+    <div class="btns">
+      <button id="btnPlay" class="big">Play</button>
+      <button id="btnNew" hidden>New game</button>
+      <button class="btnHow">How to play</button>
+      <button class="btnSound">Sound: on</button>
+    </div>
+    <p class="fine">Best in landscape on phones. Progress saves in this browser.</p>
+  </div>
+</div>
+
+<div id="confirmNew" class="modal" hidden>
+  <div class="panel"><h3>Start a new game?</h3><p>This erases your saved notes and treats.</p><div class="btns"><button id="cnYes" class="big">Start over</button><button id="cnNo">Keep my save</button></div></div>
+</div>
+
+<div id="menu" class="modal" hidden>
+  <div class="panel">
+    <h3>Paused</h3>
+    <div class="btns col">
+      <button id="mResume" class="big">Resume</button>
+      <button id="mMap">Dollhouse map</button>
+      <button id="mRespawn">Back to last sunbeam</button>
+      <button id="mHub">Return to the apartment</button>
+      <button class="btnHow">How to play</button>
+      <button class="btnSound">Sound: on</button>
+    </div>
+  </div>
+</div>
+
+<div id="map" class="modal" hidden>
+  <div class="panel wide">
+    <h3>Apartment 41C</h3>
+    <div class="mapWrap"><img src="art/hub-apartment.jpg" alt="Isometric map of the apartment"><div id="mapMarks"></div></div>
+    <p id="mapNext"></p>
+    <button id="mapClose" class="big">Close</button>
+  </div>
+</div>
+
+<div id="how" class="modal" hidden>
+  <div class="panel wide">
+    <h3>How to play</h3>
+    <div class="howGrid">
+      <div>
+        <h4>Phone and tablet</h4>
+        <p><b>Left side:</b> drag to move.<br><b>Right side:</b> drag to look around; double-tap to recenter.<br><b>Jump:</b> jump. Hold it while falling to glide (once you have the crane).<br><b>Paw:</b> talk, pull, ring. With nothing nearby, Asher pounces and Cappuccino uses Whisker Sense.<br><b>Swap</b> or tap a portrait: switch cats.<br><b>Skill:</b> your special ability. The arrow button picks between skills.</p>
+      </div>
+      <div>
+        <h4>Keyboard, mouse, gamepad</h4>
+        <p><b>Move:</b> W A S D or left stick<br><b>Look:</b> drag the mouse or right stick<br><b>Jump:</b> Space or A<br><b>Paw:</b> E or X<br><b>Swap:</b> Tab or Y<br><b>Skill:</b> Shift or right trigger<br><b>Next skill:</b> Q or right bumper<br><b>Map:</b> M &nbsp; <b>Pause:</b> Esc or P</p>
+      </div>
+      <div>
+        <h4>The cats</h4>
+        <p><b>Cappuccino</b> is cautious and careful. She never walks off an edge by accident (press Jump to hop down), pushes heavy crates, calms upset creatures with her purr, and her Whisker Sense reveals hidden things.<br><b>Asher</b> is young and bold. He jumps higher, pounces, and can jump off Cappuccino's back for an extra-high Boost.</p>
+      </div>
+    </div>
+    <button id="howClose" class="big">Got it</button>
+  </div>
+</div>
+
+<div id="duet" hidden>
+  <div class="duetInner">
+    <h3>The Homesong</h3>
+    <div id="duetWho"></div>
+    <div class="duetStage"><div class="duetTarget"></div><div id="duetRing"></div><div id="duetNote">Do</div></div>
+    <div id="duetDots"></div>
+    <p id="duetMsg"></p>
+  </div>
+</div>
+
+<div id="fatal" hidden></div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

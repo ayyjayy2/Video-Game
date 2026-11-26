@@ -183,11 +183,11 @@ td .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-rig
         <div class="pic"><img src="art/card-cappuccino.jpg" alt="Cappuccino sitting, looking up"></div>
         <div>
           <h3>Cappuccino</h3>
-          <div class="tagline">Older calico, she/her. "Cappy" to no one but Asher. The careful one.</div>
+          <div class="tagline">Older calico, she/her. The cautious, careful one.</div>
           <dl>
-            <dt>Personality</dt><dd>Dry-witted, patient, loves routine. Pretends not to care, cares the most.</dd>
+            <dt>Personality</dt><dd>Cautious and careful. Looks twice before every leap, never steps off an edge by accident, and keeps Asher out of trouble. Patient, dry-witted, cares the most.</dd>
             <dt>Backstory</dt><dd>She has slept beside Grandma Ines's music box for fourteen years and is the only one who remembers its song.</dd>
-            <dt>Abilities</dt><dd>Whisker Sense (reveal hidden paths and clues), Calm Purr (soothe creatures), Shoulder Push (move heavy objects), Sunbeam Nap (heals both cats, saves)</dd>
+            <dt>Abilities</dt><dd>Careful Step (never walks off a ledge by accident), Whisker Sense (reveal hidden paths and clues), Calm Purr (soothe creatures), Shoulder Push (move heavy objects), Sunbeam Nap (heals both cats, saves)</dd>
             <dt>Limits</dt><dd>Shorter jumps, slower run, tires in long chases</dd>
             <dt>Arc</dt><dd>Learns to play again and to trust the new kid.</dd>
           </dl>
@@ -236,7 +236,7 @@ td .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-rig
       <p class="small" style="margin-top:10px">The dashed eighth note is the twist ending: the mended box plays a new final note, Asher's, because the home's song now has room for him.</p>
     </div>
     <div class="acts">
-      <div class="act"><h4>Act one: The Crack <span>Mon to Tue</span></h4><p>Tutorial in the apartment, then the Lilypad Bazaar and the Clockwork Bakery. Asher is guilty and showing off; Cappuccino is grumpy and only helping to fix "his mess". First leaks appear: bubbles drifting down the hallway, a ticking sound from the oven at night.</p></div>
+      <div class="act"><h4>Act one: The Crack <span>Mon to Tue</span></h4><p>Tutorial in the apartment, then the Lilypad Bazaar and the Clockwork Bakery. Asher is guilty and showing off; Cappuccino is wary, careful, and only helping to fix "his mess". First leaks appear: bubbles drifting down the hallway, a ticking sound from the oven at night.</p></div>
       <div class="act"><h4>Act two: The Leaks <span>Wed to Fri</span></h4><p>The Folded Atlas, Canopy Hollow and the Spin Cycle Circus. The worlds' residents mention the Hush. Each night a dream cutscene replays one of Cappuccino's memories of Grandma Ines, and Asher slowly realises what the box means to her. By Friday the living room has gone grey and silent.</p></div>
       <div class="act"><h4>Act three: The Hush <span>Sat to Sun</span></h4><p>In the Quilted Dreamsky the Hush is eating the stars, and it finally attacks. Cappuccino is drained, so Asher has to lead alone and carry her home: the emotional peak and the one stretch where you play only Asher. Sky Harbor clears the winds, then the finale inside the music box itself.</p></div>
       <div class="act"><h4>Ending: Second Verse</h4><p>The Homesong plays with an eighth note added. The Thresholds dim to a gentle glow. Noor comes home, winds the box, and finds both cats asleep curled together on the green sofa. After the credits every world stays open for collectibles and harder "Second Verse" challenges.</p></div>
@@ -369,66 +369,52 @@ td .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-rig
 
 <section class="band" id="tech">
   <div class="wrap">
-    <h2>Technical setup: 3D, mobile first, desktop ready</h2>
+    <h2>Technical setup: the playable build</h2>
     <div class="story">
       <div>
-        <p><b>Recommended engine: Unity 6 with URP and Cinemachine.</b> Third person in 3D on phones is the hard part of this project, and Unity has the most proven mobile 3D pipeline, a ready-made third-person camera system (Cinemachine), and good tools for animal animation. The free Personal licence covers small teams below a revenue threshold. <b>Godot 4</b> remains a free, open-source alternative if you'd rather avoid licensing, with more work needed on the camera and mobile performance.</p>
+        <p><b>Built with Three.js (WebGL), in the repo's <code>game/</code> folder.</b> The game runs in any modern phone or desktop browser today, with touch, keyboard and mouse, and gamepad controls. For the app stores it can be wrapped as a native app with Capacitor (iOS and Android); for desktop, with Electron or Tauri (Windows, macOS, Linux and Steam). Unity remains an option later if the project moves to fully modelled, art-quality 3D.</p>
         <ul style="padding-left:18px">
-          <li><b>Art pipeline:</b> concept painting, then Blender model, then hand-painted textures (one atlas per kit), then Unity. Modular pieces match the kit tiles: water tiles, quilt tiles, map tiles, bridges.</li>
-          <li><b>Budgets (targets):</b> about 10k triangles per cat, 150k to 300k per visible scene, 60 fps on mid-range phones from about 2021, 30 fps floor, baked lighting with a few real-time lanterns.</li>
-          <li><b>Cats:</b> one shared quadruped rig, two meshes. Animations: idle, sit, loaf, groom, walk, trot, run, jump, land, wall kick, climb, pounce, push, glide, carry (Asher carrying Cappuccino), nap, plus the five face expressions from each sheet as blend shapes.</li>
-          <li><b>Follower AI:</b> the inactive cat pathfinds after the active one on a NavMesh and teleports to a nearby safe spot if left behind.</li>
-          <li><b>Input:</b> one action map (move, look, jump, paw, swap, skill, map) bound to touch, keyboard and mouse, and gamepad, so the desktop port is mostly bindings and higher-resolution assets.</li>
-          <li><b>Save:</b> local save at every Sunbeam and each night; cloud saves through the platform stores later.</li>
-          <li><b>Accessibility:</b> remappable controls, hold-or-toggle options, colour-blind safe Threshold glow (shape plus colour), subtitles on every line, assist mode with extra health and slower chases.</li>
+          <li><b>What is in the build:</b> the apartment hub, all seven worlds and the Music Box Ballroom finale, each with its full mission, the story cards and dialogue, the follower cat, every ability, sunbeam checkpoints, fish treats, the collar shop, the dollhouse map and saving.</li>
+          <li><b>Art in the build:</b> the cats, residents and worlds are built from simple 3D shapes in the concept art's colours, a stand-in for proper models. The concept paintings themselves are used for the title screen, loading screens, story cards, the dollhouse map and the HUD portraits.</li>
+          <li><b>Cappuccino's caution is a mechanic:</b> while you control her, she will not walk off a ledge by accident (press Jump to hop down). She is also the only one who can push crates, calm creatures and use Whisker Sense.</li>
+          <li><b>Follower:</b> the cat you are not controlling follows, jumps after you, and pops to your side if left behind. On a pressure plate it stays put until you swap back.</li>
+          <li><b>Sound:</b> all music and sound effects are synthesised in the browser; every world's music is built on its note of the Homesong.</li>
+          <li><b>Save:</b> progress (notes, abilities, treats, collar) is saved in the browser after each note and at sunbeams.</li>
         </ul>
-        <h3 style="margin:22px 0 6px">Roadmap (estimates)</h3>
+        <h3 style="margin:22px 0 6px">Next steps</h3>
         <div class="road">
-          <div><b>Pre-production</b><span>Lock this design. Greybox the apartment in 3D at cat scale. Prototype the camera, cat swapping and the follower AI on a real phone.</span></div>
-          <div><b>Vertical slice</b><span>Bathroom and kitchen in the hub plus the full Lilypad Bazaar at final quality, built from the market kit.</span></div>
-          <div><b>Production 1</b><span>Clockwork Bakery, Folded Atlas, Canopy Hollow; acts one and two cutscenes.</span></div>
-          <div><b>Production 2</b><span>Spin Cycle Circus, Quilted Dreamsky, Sky Harbor, the Music Box Ballroom finale.</span></div>
-          <div><b>Mobile launch</b><span>Touch and camera polish, device testing, store pages, soft launch.</span></div>
-          <div><b>Desktop port</b><span>Mouse and gamepad, split-screen co-op, higher-resolution textures, Steam release.</span></div>
+          <div><b>Playtest</b><span>Play every world on a real phone and a laptop; tune jump distances, camera feel and difficulty.</span></div>
+          <div><b>Real models</b><span>Replace the stand-in shapes with modelled, textured cats and world kits built from the concept art (glTF files load straight into Three.js).</span></div>
+          <div><b>Missing kits</b><span>Concept art for the Spin Cycle Circus, Sky Harbor and the Music Box Ballroom.</span></div>
+          <div><b>App stores</b><span>Wrap with Capacitor, add icons and splash screens, test on devices, submit.</span></div>
+          <div><b>Desktop</b><span>Wrap with Electron or Tauri, add split-screen co-op, Steam release.</span></div>
         </div>
       </div>
       <div>
         <h3 style="margin-bottom:8px">Project folders</h3>
-<pre class="tree">WhiskerWorlds/            (Unity project)
-  Assets/
-    Art/
-      Concept/           these paintings
-      Cats/Cappuccino/   mesh, textures
-      Cats/Asher/
-      Cats/Shared/       rig, animations
-      Hub/Apartment/
-      Worlds/
-        W1_LilypadBazaar/
-        W2_ClockworkBakery/
-        W3_FoldedAtlas/
-        W4_CanopyHollow/
-        W5_SpinCycleCircus/
-        W6_QuiltedDreamsky/
-        W7_SkyHarbor/
-        Finale_MusicBox/
-    Audio/  Fonts/  UI/  VFX/
-    Scenes/
-      Hub.unity  W1..W7.unity  Finale.unity
-    Scripts/
-      Cats/CatController.cs
-      Cats/CappuccinoAbilities.cs
-      Cats/AsherAbilities.cs
-      Cats/FollowerAI.cs
-      Camera/CatCameraRig.cs
-      Core/GameState.cs  SaveSystem.cs
-      World/Threshold.cs  Mission.cs
-      World/HushFog.cs
-      UI/Hud.cs  Dialogue.cs  DollhouseMap.cs
-    Data/
-      Worlds/            one asset per mission
-      Dialogue/
-  ProjectSettings/</pre>
-        <p class="small" style="margin-top:10px"><b>Key systems:</b> CatController holds shared third-person movement; each cat adds its abilities. CatCameraRig wraps Cinemachine follow and puzzle cameras. GameState tracks notes, abilities and the current day. Threshold loads a world and returns the cats to the same spot. Missions are data assets, so writers can tune steps without code.</p>
+<pre class="tree">game/
+  index.html        the game page
+  css/style.css     HUD, menus, touch controls
+  art/              concept art used in menus
+  vendor/           three.module.min.js
+  js/
+    main.js         boot, menu buttons
+    game.js         loop, player, follower,
+                    camera, abilities, save
+    level.js        physics, platforms,
+                    plates, vents, pickups
+    cat.js          the two cats + animation
+    critters.js     world residents
+    props.js        lanterns, gears, quilts...
+    input.js        touch, keys, gamepad
+    audio.js        synthesised sound
+    ui.js           dialogue, cards, map, duet
+    story.js        worlds, abilities, story
+    levels/
+      hub.js        the apartment
+      worlds1.js    worlds 1 to 4
+      worlds2.js    worlds 5 to 7 + finale</pre>
+        <p class="small" style="margin-top:10px"><b>Key systems:</b> every level is a Level object built from boxes, moving platforms, pressure plates, vents, hidden platforms (revealed by Whisker Sense, the lantern or Echo Meow) and scripted mission steps. The Game object owns the cats, the camera and the flow between the apartment and the worlds.</p>
       </div>
     </div>
   </div>
