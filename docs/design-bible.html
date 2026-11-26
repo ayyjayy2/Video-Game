@@ -1,0 +1,577 @@
+<title>Whisker Worlds Design Bible</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE occasion: a cosy, bright game bible for a cat adventure
+   IDEA a dollhouse cutaway of the cats' skyrise apartment, every object a door
+   PICTURE the two-level apartment cut open at dusk, portals glowing on each world's object
+   COLOUR twilight teal ground for the hero, white pages, calico orange lead, each world's own palette
+   TYPE Fredoka (rounded, game logo feel) + Nunito
+   LAYOUT laptop: title row across the top, cutaway full width beneath, legend under it; phone: title, cutaway, legend list */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#121a1d);--ink:light-dark(#1c2226,#eef3f2);--soft:light-dark(#56616a,#a9b7b9);--tint:light-dark(#eaf5f3,#182729);--line:light-dark(#d9e3e2,#2b3c3f);--card:light-dark(#ffffff,#18232600);--orange:#e8792f;--teal:light-dark(#1f7f86,#5cc6c4);--night:#163a46}
+:root[data-theme=light]{color-scheme:light}
+:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.58 Nunito,system-ui,sans-serif;overflow-x:clip;margin:0}
+h1,h2,h3,h4{font-family:Fredoka,Nunito,sans-serif;line-height:1.08;letter-spacing:-.01em;margin:0}
+h2{font-size:clamp(28px,4vw,40px);font-weight:600;margin-bottom:10px}
+h3{font-size:22px;font-weight:600}
+h4{font-size:17px;font-weight:600;margin-bottom:4px}
+p{margin:0 0 12px}
+a{color:inherit}
+.band{padding-block:clamp(32px,5vw,64px);padding-left:max(5vw,16px,env(safe-area-inset-left,0px));padding-right:max(5vw,16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1240px;margin:0 auto}
+.tint{background:var(--tint)}
+.lede{font-size:18px;color:var(--soft);max-width:62ch;margin-bottom:24px}
+.hero{background:var(--night);color:#f6efe6;margin-top:calc(-1*env(safe-area-inset-top,0px));padding-top:calc(env(safe-area-inset-top,0px) + 2.2rem)}
+.hrow{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;align-items:end;margin-bottom:22px}
+.hero h1{font-size:clamp(44px,7vw,76px);font-weight:700;color:#fff}
+.hero h1 span{display:block;font-size:clamp(17px,2vw,20px);font-family:Nunito,sans-serif;font-weight:700;color:#ffc49b;letter-spacing:0;margin-top:10px;line-height:1.4}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px;font-size:15px}
+.facts b{display:block;color:#ffc49b;font-weight:700;font-size:13px}
+.scene{position:relative;aspect-ratio:1000/640;border-radius:18px;overflow:hidden;background:#2a7f8a}
+.scene svg{position:absolute;inset:0;width:100%;height:100%}
+.hot{position:absolute;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:50%;border:3px solid #fff;color:#fff;font:700 15px Fredoka,sans-serif;display:grid;place-items:center;text-decoration:none;box-shadow:0 0 0 4px rgba(255,255,255,.25);transition:transform .15s}
+.hot:hover,.hot:focus-visible{transform:translate(-50%,-50%) scale(1.18);outline:none}
+.legend{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px 18px;margin-top:18px;padding:0;list-style:none;font-size:15px}
+.legend a{display:flex;gap:10px;align-items:center;text-decoration:none;padding:6px 0}
+.legend i{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:700 13px Fredoka,sans-serif;font-style:normal;color:#fff;border:2px solid #fff}
+.legend small{display:block;color:#b9d3d3;font-size:13px}
+.cats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.cat{border:1px solid var(--line);border-radius:20px;padding:22px;display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;background:var(--bg)}
+.cat .pic{border-radius:16px;aspect-ratio:1/1.15;display:grid;place-items:end center;overflow:hidden}
+.cat .pic svg{width:92%;height:auto}
+.cat h3{font-size:30px}
+.tagline{color:var(--soft);font-weight:700;margin:4px 0 12px}
+.cat dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 14px;margin:0;font-size:15px}
+.cat dt{font-weight:800}
+.cat dd{margin:0}
+.quote{font-style:italic;color:var(--soft);margin-top:12px;font-size:15px}
+.duo{margin-top:18px;padding:16px 18px;border-radius:14px;background:var(--tint);font-size:15px}
+.story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px}
+.staff{position:relative;height:190px;margin:8px 0 6px;background:repeating-linear-gradient(to bottom,transparent 0 31px,var(--line) 31px 33px);background-size:100% 165px;background-repeat:no-repeat;background-position:0 12px;display:grid;grid-template-columns:repeat(8,minmax(0,1fr))}
+.staff div{position:relative}
+.staff b{position:absolute;left:50%;width:30px;height:24px;border-radius:50%;transform:translate(-50%,50%) rotate(-18deg)}
+.staff b::after{content:"";position:absolute;right:1px;bottom:12px;width:3px;height:52px;background:inherit;border-radius:2px}
+.staff b.open{background:transparent!important;border:3px dashed var(--orange)}
+.staff b.open::after{background:var(--orange)}
+.notes{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));font-size:13px;text-align:center;line-height:1.3;color:var(--soft)}
+.notes strong{display:block;color:var(--ink);font-family:Fredoka,sans-serif;font-size:16px}
+.acts{display:grid;gap:14px;margin-top:6px}
+.act{border-left:5px solid var(--orange);padding:4px 0 4px 16px}
+.act h4 span{color:var(--soft);font-family:Nunito,sans-serif;font-weight:700;font-size:14px;margin-left:6px}
+.loop{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:8px 0 26px}
+.step{flex:1 1 140px;background:var(--bg);border:2px solid var(--teal);border-radius:16px;padding:14px;font-size:15px;position:relative}
+.step b{display:block;font-family:Fredoka,sans-serif;font-size:17px;font-weight:600;margin-bottom:4px;color:var(--teal)}
+.step:not(:last-child)::after{content:"\2192";position:absolute;right:-13px;top:50%;transform:translateY(-50%);font-weight:800;color:var(--orange);background:var(--tint);border-radius:50%;width:18px;text-align:center}
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.box{border:1px solid var(--line);border-radius:16px;padding:18px;background:var(--bg)}
+.box ul{margin:6px 0 0;padding-left:18px}
+.box li{margin-bottom:6px}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th{text-align:left;font-weight:800;border-bottom:2px solid var(--ink);padding:8px 10px;vertical-align:bottom}
+td{border-bottom:1px solid var(--line);padding:9px 10px;vertical-align:top}
+td .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;vertical-align:-1px}
+.worlds{display:grid;gap:26px}
+.world{border-radius:22px;overflow:hidden;border:1px solid var(--line);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);background:var(--bg);scroll-margin-top:16px}
+.wart{position:relative;min-height:300px;color:#fff;padding:22px;display:flex;flex-direction:column;justify-content:space-between}
+.wart svg{position:absolute;inset:0;width:100%;height:100%}
+.wart>*{position:relative}
+.wart .num{font:700 15px Fredoka,sans-serif;background:rgba(0,0,0,.28);padding:4px 12px;border-radius:99px;align-self:flex-start}
+.wart h3{font-size:clamp(28px,3vw,36px);font-weight:700;text-shadow:0 2px 0 rgba(0,0,0,.25)}
+.wart .where{font-weight:700;font-size:15px;text-shadow:0 1px 0 rgba(0,0,0,.35)}
+.sw{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.sw span{font-size:12px;font-weight:700;background:rgba(0,0,0,.35);padding:3px 8px 3px 4px;border-radius:99px;display:flex;align-items:center;gap:6px}
+.sw span i{width:14px;height:14px;border-radius:50%;border:2px solid #fff}
+.wbody{padding:22px 24px}
+.wbody .m{font-family:Fredoka,sans-serif;font-size:20px;font-weight:600;margin-bottom:6px}
+.wbody ol{margin:6px 0 14px;padding-left:22px}
+.wbody ol li{margin-bottom:5px}
+.meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px;font-size:15px;border-top:1px solid var(--line);padding-top:14px}
+.meta b{display:block;font-size:13px;color:var(--soft)}
+.reward{grid-column:1/-1;background:var(--tint);border-radius:12px;padding:10px 14px}
+.pal{display:grid;grid-template-columns:repeat(auto-fit,minmax(8.5em,1fr));gap:12px;margin-top:10px}
+.pal div{border-radius:14px;overflow:hidden;border:1px solid var(--line);font-size:13px}
+.pal div i{display:block;height:58px}
+.pal div span{display:block;padding:6px 10px}
+.vis{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:28px;align-items:start}
+.phone{background:#1c1c22;border-radius:34px;padding:12px;box-shadow:0 0 0 2px #3a3a44 inset}
+.screen{position:relative;aspect-ratio:19.5/9;border-radius:24px;overflow:hidden;font-family:Fredoka,sans-serif;color:#fff}
+.screen svg.bg{position:absolute;inset:0;width:100%;height:100%}
+.hud{position:absolute;inset:0;padding:3.2% 5%}
+.ports{position:absolute;left:5%;top:7%;display:flex;gap:6px;align-items:center}
+.port{width:clamp(28px,6vw,46px);aspect-ratio:1;border-radius:50%;background:#fff;border:3px solid #fff;overflow:hidden;display:grid;place-items:end center}
+.port.on{border-color:#ffc93c;box-shadow:0 0 0 3px rgba(255,201,60,.5)}
+.port svg{width:120%;margin-bottom:-28%}
+.paws{font-size:clamp(11px,1.6vw,15px);margin-left:6px;letter-spacing:2px}
+.nc{position:absolute;left:50%;top:7%;transform:translateX(-50%);background:rgba(0,0,0,.35);border-radius:99px;padding:3px 12px;font-size:clamp(10px,1.5vw,14px);display:flex;gap:4px;align-items:center;white-space:nowrap}
+.nc i{width:clamp(7px,1.2vw,11px);aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.35)}
+.nc i.got{background:#ffc93c}
+.fish{position:absolute;right:5%;top:7%;background:rgba(0,0,0,.35);border-radius:99px;padding:3px 12px;font-size:clamp(10px,1.5vw,14px);white-space:nowrap}
+.joy{position:absolute;left:6%;bottom:9%;width:18%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.6)}
+.joy::after{content:"";position:absolute;left:30%;top:30%;width:40%;height:40%;border-radius:50%;background:rgba(255,255,255,.75)}
+.btn{position:absolute;border-radius:50%;background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.75);display:grid;place-items:center;font-size:clamp(8px,1.3vw,12px)}
+.bj{right:6%;bottom:9%;width:13%;aspect-ratio:1}
+.ba{right:21%;bottom:6%;width:9%;aspect-ratio:1}
+.bs{right:8%;bottom:42%;width:8%;aspect-ratio:1}
+.bb{right:20%;bottom:32%;width:8%;aspect-ratio:1}
+.talk{position:absolute;left:30%;top:24%;width:34%;background:#fff;color:#1c2226;border-radius:14px;padding:6px 10px;font:600 clamp(8px,1.25vw,13px)/1.3 Nunito,sans-serif}
+.talk b{display:block;color:#e8792f;font-family:Fredoka,sans-serif}
+.caption{font-size:14px;color:var(--soft);margin-top:10px}
+.tree{background:var(--tint);border-radius:14px;padding:16px 18px;font:14px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-x:auto;margin:0}
+.road{display:grid;gap:10px;margin-top:8px}
+.road div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:14px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.road b{font-family:Fredoka,sans-serif;font-weight:600}
+.small{font-size:14px;color:var(--soft)}
+@keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
+.glow{animation:pulse 2.4s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.glow{animation:none}.hot{transition:none}}
+@media(max-width:900px){.hrow,.story,.vis{grid-template-columns:minmax(0,1fr)}.cats{grid-template-columns:minmax(0,1fr)}.legend{grid-template-columns:repeat(2,minmax(0,1fr))}.cols3{grid-template-columns:minmax(0,1fr)}.world{grid-template-columns:minmax(0,1fr)}.wart{min-height:220px}}
+@media(max-width:600px){.hot{width:24px;height:24px;font-size:12px;border-width:2px}.cat{grid-template-columns:minmax(0,1fr)}.cat .pic{max-width:180px}.meta{grid-template-columns:minmax(0,1fr)}.step:not(:last-child)::after{display:none}.legend{grid-template-columns:minmax(0,1fr)}table{font-size:13px}th,td{padding:6px 4px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--line)}.stack td{display:flex;justify-content:space-between;gap:12px;border:0;padding:3px 0;text-align:right}.stack td::before{content:attr(data-l);font-weight:800;text-align:left}.road div{grid-template-columns:minmax(0,1fr);gap:2px}.staff b{width:22px;height:18px}.notes{font-size:11px}}
+</style>
+
+<header class="band hero">
+  <div class="wrap">
+    <div class="hrow">
+      <h1>Whisker Worlds<span>Two apartment cats, one broken music box, and seven tiny worlds hiding inside the furniture of a 41st-floor flat.</span></h1>
+      <div class="facts">
+        <div><b>Platform</b>Mobile first (iOS, Android), desktop second</div>
+        <div><b>Genre</b>2D adventure platformer with light puzzles</div>
+        <div><b>Players</b>1, swap between cats; local co-op on desktop</div>
+        <div><b>Length</b>7 worlds + finale, about 6 to 8 hours</div>
+      </div>
+    </div>
+    <div class="scene" id="scene">
+      <svg viewBox="0 0 1000 640" preserveAspectRatio="xMidYMid meet" aria-label="Cutaway of the two-level apartment at dusk, with glowing doorways on the bathtub, freezer, bookshelf, plant, dryer, bed, bay window and music box">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a7f8a"/><stop offset=".75" stop-color="#ffc49b"/></linearGradient>
+          <linearGradient id="win" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b8f99"/><stop offset="1" stop-color="#ffcf9f"/></linearGradient>
+          <radialGradient id="glow"><stop offset="0" stop-color="#fffbe0"/><stop offset=".45" stop-color="#ffe27a" stop-opacity=".7"/><stop offset="1" stop-color="#ffe27a" stop-opacity="0"/></radialGradient>
+          <radialGradient id="dry"><stop offset="0" stop-color="#ffe6c2"/><stop offset="1" stop-color="#ff9a5c"/></radialGradient>
+        </defs>
+        <rect width="1000" height="640" fill="url(#sky)"/>
+        <circle cx="955" cy="470" r="70" fill="#ffe7c4" opacity=".85"/>
+        <g id="sk1"></g><g id="sk2"></g>
+        <rect x="70" y="20" width="860" height="640" fill="#3b3350"/>
+        <g id="upper"></g>
+        <rect x="70" y="120" width="860" height="10" fill="#2c2640"/>
+        <rect x="95" y="130" width="305" height="230" fill="#f6d6c8"/>
+        <rect x="410" y="130" width="230" height="230" fill="#cfeeea"/>
+        <rect x="650" y="130" width="255" height="230" fill="#e3dcf3"/>
+        <rect x="95" y="350" width="810" height="10" fill="#b9805a"/>
+        <rect x="70" y="360" width="860" height="20" fill="#2c2640"/>
+        <rect x="95" y="380" width="235" height="230" fill="#f3e7b8"/>
+        <rect x="340" y="380" width="360" height="230" fill="#fbe3c4"/>
+        <rect x="710" y="380" width="195" height="230" fill="#d6ecd2"/>
+        <rect x="95" y="600" width="810" height="10" fill="#b9805a"/>
+        <rect x="70" y="610" width="860" height="30" fill="#2c2640"/>
+        <!-- bedroom -->
+        <rect x="255" y="160" width="100" height="72" rx="4" fill="url(#win)" stroke="#fff" stroke-width="5"/>
+        <line x1="305" y1="160" x2="305" y2="232" stroke="#fff" stroke-width="4"/>
+        <rect x="122" y="232" width="14" height="110" rx="4" fill="#5e4570"/>
+        <rect x="130" y="296" width="240" height="44" rx="6" fill="#7a5a8a"/>
+        <rect x="135" y="280" width="232" height="22" rx="8" fill="#fff"/>
+        <rect x="200" y="275" width="168" height="32" rx="10" fill="#e8792f"/>
+        <path d="M215 285h140M215 296h140" stroke="#f6a664" stroke-width="3"/>
+        <rect x="142" y="266" width="54" height="20" rx="10" fill="#fff" stroke="#e2d4dc" stroke-width="2"/>
+        <rect x="143" y="340" width="214" height="10" fill="#2a2238"/>
+        <rect x="135" y="340" width="9" height="10" fill="#5e4570"/><rect x="356" y="340" width="9" height="10" fill="#5e4570"/>
+        <!-- bathroom -->
+        <path d="M425 130v230" stroke="#b8e0db" stroke-width="0"/>
+        <g stroke="#b6dfd9" stroke-width="2"><path d="M410 200h230M410 240h230M410 280h230M450 130v230M490 130v230M530 130v230M570 130v230M610 130v230"/></g>
+        <rect x="470" y="160" width="60" height="72" rx="30" fill="#effcfa" stroke="#8fc4be" stroke-width="4"/>
+        <rect x="442" y="288" width="156" height="52" rx="24" fill="#fff" stroke="#9fc9c4" stroke-width="4"/>
+        <circle cx="458" cy="346" r="6" fill="#c9a227"/><circle cx="582" cy="346" r="6" fill="#c9a227"/>
+        <path d="M590 288v-26h-18" stroke="#c9a227" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <g fill="#fff" stroke="#9fd8e6" stroke-width="2"><circle cx="480" cy="282" r="12"/><circle cx="502" cy="276" r="15"/><circle cx="530" cy="280" r="13"/><circle cx="555" cy="284" r="10"/><circle cx="518" cy="250" r="6"/><circle cx="540" cy="232" r="4"/></g>
+        <!-- laundry -->
+        <rect x="680" y="168" width="200" height="8" fill="#9a8fb8"/>
+        <rect x="692" y="148" width="42" height="20" rx="4" fill="#7cc26a"/><rect x="740" y="150" width="40" height="18" rx="4" fill="#ffc93c"/><rect x="786" y="146" width="44" height="22" rx="4" fill="#ff7a59"/>
+        <rect x="680" y="255" width="95" height="95" rx="8" fill="#f8f8fb" stroke="#b4abc9" stroke-width="3"/>
+        <circle cx="727" cy="306" r="29" fill="#9fd3e8" stroke="#b4abc9" stroke-width="5"/>
+        <rect x="785" y="255" width="95" height="95" rx="8" fill="#f8f8fb" stroke="#b4abc9" stroke-width="3"/>
+        <circle cx="832" cy="306" r="29" fill="url(#dry)" stroke="#b4abc9" stroke-width="5"/>
+        <rect x="692" y="263" width="30" height="6" rx="3" fill="#cfc8e0"/><rect x="797" y="263" width="30" height="6" rx="3" fill="#cfc8e0"/>
+        <!-- study -->
+        <rect x="150" y="410" width="90" height="60" rx="4" fill="#fff" stroke="#d9c58a" stroke-width="3"/>
+        <path d="M160 460l22-24 16 14 14-10 18 20" stroke="#7cc26a" stroke-width="5" fill="none"/>
+        <rect x="112" y="522" width="150" height="10" rx="3" fill="#8a5a3c"/>
+        <rect x="120" y="532" width="8" height="68" fill="#8a5a3c"/><rect x="246" y="532" width="8" height="68" fill="#8a5a3c"/>
+        <rect x="148" y="500" width="54" height="22" rx="3" fill="#5c6670"/>
+        <g fill="#2f8f4e"><ellipse cx="262" cy="498" rx="30" ry="15" transform="rotate(-35 262 498)"/><ellipse cx="306" cy="492" rx="30" ry="15" transform="rotate(35 306 492)"/><ellipse cx="284" cy="470" rx="16" ry="30"/><ellipse cx="258" cy="530" rx="26" ry="12" transform="rotate(-15 258 530)"/><ellipse cx="312" cy="528" rx="22" ry="11" transform="rotate(20 312 528)"/></g>
+        <g stroke="#9ccc4a" stroke-width="2"><path d="M284 548V448M284 540l-32-40M284 540l28-44"/></g>
+        <path d="M264 556h42l-6 44h-30z" fill="#d9774a"/>
+        <!-- living room -->
+        <rect x="355" y="410" width="92" height="190" rx="4" fill="#8a5a3c"/>
+        <g id="books"></g>
+        <rect x="468" y="520" width="124" height="80" fill="#ead6c1"/>
+        <rect x="492" y="545" width="76" height="55" rx="4" fill="#3a2a2a"/>
+        <path d="M512 600c0-18 10-22 10-34 8 10 14 16 14 34z" fill="#ff9f43"/>
+        <rect x="458" y="512" width="144" height="10" rx="3" fill="#8a5a3c"/>
+        <rect x="514" y="492" width="34" height="20" rx="3" fill="#c9a227"/>
+        <path d="M512 492l4-10h30l4 10z" fill="#e0bb45"/>
+        <circle cx="531" cy="502" r="3" fill="#7a5a1c"/>
+        <rect x="610" y="408" width="82" height="117" rx="4" fill="url(#win)" stroke="#fff" stroke-width="5"/>
+        <path d="M651 408v117M610 466h82" stroke="#fff" stroke-width="4"/>
+        <g fill="#3b3350" opacity=".55"><rect x="616" y="490" width="12" height="35"/><rect x="630" y="478" width="10" height="47"/><rect x="664" y="486" width="14" height="39"/></g>
+        <rect x="600" y="524" width="102" height="9" rx="3" fill="#fff"/>
+        <ellipse cx="620" cy="602" rx="80" ry="7" fill="#e8792f" opacity=".45"/>
+        <g id="miso" transform="translate(582 556) scale(.38)"></g>
+        <g id="pepper" transform="translate(632 556) scale(.38)"></g>
+        <!-- kitchen -->
+        <rect x="720" y="418" width="96" height="44" rx="4" fill="#fff" stroke="#a8c7a2" stroke-width="3"/>
+        <path d="M768 418v44" stroke="#a8c7a2" stroke-width="3"/>
+        <rect x="720" y="540" width="96" height="60" fill="#fff" stroke="#a8c7a2" stroke-width="3"/>
+        <rect x="716" y="532" width="104" height="10" rx="3" fill="#6c7a89"/>
+        <circle cx="742" cy="522" r="10" fill="#e63946"/><rect x="760" y="512" width="20" height="20" rx="4" fill="#5aa3d9"/>
+        <rect x="826" y="412" width="70" height="188" rx="8" fill="#f2f6f8" stroke="#9aaab3" stroke-width="3"/>
+        <path d="M826 472h70" stroke="#9aaab3" stroke-width="3"/>
+        <rect x="834" y="430" width="5" height="28" rx="2" fill="#9aaab3"/><rect x="834" y="484" width="5" height="40" rx="2" fill="#9aaab3"/>
+        <path d="M850 470c4 6 10 6 14 0M868 470c4 6 10 6 14 0" stroke="#bfe6ff" stroke-width="3" fill="none"/>
+        <g id="portals"></g>
+      </svg>
+    </div>
+    <ul class="legend" id="legend"></ul>
+  </div>
+</header>
+
+<section class="band">
+  <div class="wrap">
+    <h2>Two cats who see the apartment very differently</h2>
+    <p class="lede">The player swaps between the cats at any time. Each one solves problems the other can't, and several puzzles need both. Their friendship is the heart of the story. Names are placeholders.</p>
+    <div class="cats">
+      <article class="cat">
+        <div class="pic" style="background:#ffe6d2"><svg viewBox="-4 -4 112 130" id="misoBig"></svg></div>
+        <div>
+          <h3>Miso</h3>
+          <div class="tagline">14-year-old calico, she/her. The careful one.</div>
+          <dl>
+            <dt>Personality</dt><dd>Dry-witted, patient, loves routine. Pretends not to care, cares the most.</dd>
+            <dt>Backstory</dt><dd>She has slept beside Grandma Ines's music box for fourteen years and is the only one who remembers its song.</dd>
+            <dt>Abilities</dt><dd>Whisker Sense (reveal hidden paths and clues), Calm Purr (soothe creatures), Shoulder Push (move heavy objects), Sunbeam Nap (heals both cats, saves the game)</dd>
+            <dt>Limits</dt><dd>Short jumps, slower run, tires during long chases</dd>
+            <dt>Arc</dt><dd>Learns to play again and to trust the new kid.</dd>
+          </dl>
+          <p class="quote">"We do not run in the house. We especially do not run in the bathtub."</p>
+        </div>
+      </article>
+      <article class="cat">
+        <div class="pic" style="background:#e3e8ef"><svg viewBox="-4 -4 112 130" id="pepperBig"></svg></div>
+        <div>
+          <h3>Pepper</h3>
+          <div class="tagline">18-month-old white and grey tom, he/him. The bold one.</div>
+          <dl>
+            <dt>Personality</dt><dd>Fearless, curious, clumsy, desperate to impress Miso.</dd>
+            <dt>Backstory</dt><dd>Adopted a month ago. Still learning the rules of the apartment, mostly by breaking them.</dd>
+            <dt>Abilities</dt><dd>High Jump, Wall Kick, Pounce (stun and grab), Knock-Off (swat objects off ledges to make bridges or hit switches)</dd>
+            <dt>Limits</dt><dd>Noisy, wakes sleeping creatures, cannot calm anything</dd>
+            <dt>Arc</dt><dd>Learns patience, and that he belongs in this family.</dd>
+          </dl>
+          <p class="quote">"I didn't touch it. It fell near me."</p>
+        </div>
+      </article>
+    </div>
+    <div class="duo"><b>Tandem moves:</b> Boost (Pepper jumps off Miso's back for extra height), Anchor (Miso holds a rope or lever while Pepper explores), Lantern Pass (only one cat carries the light, the other follows), and Curl Up (both cats nap together to restore full health at Sunbeams).</div>
+  </div>
+</section>
+
+<section class="band tint" id="story">
+  <div class="wrap story">
+    <div>
+      <h2>The Homesong: seven notes to bring home back</h2>
+      <p>Apartment 41C sits high above Lumen City. Their human, Noor, has left for a week-long work trip, and the neighbor drops by each morning to fill the food bowls.</p>
+      <p>On Monday morning Pepper's zoomies knock Grandma Ines's music box off the mantel. It cracks open, and its seven notes fly out as glowing motes, diving into the bathtub, the freezer, the bookshelf and more. Every object a note touches becomes a <b>Threshold</b>, a doorway into a tiny world.</p>
+      <p>Miso knows what this means: the Homesong is what kept the little worlds on their side of the walls. Without it, the worlds start leaking into the apartment, and a grey, sound-eating fog called <b>the Hush</b> creeps in, muffling colour and music room by room.</p>
+      <p><b>End goal:</b> recover all seven notes, one per day, mend the music box and play the Homesong before Noor comes home on Sunday night.</p>
+      <div class="staff" id="staff"></div>
+      <div class="notes" id="notes"></div>
+      <p class="small" style="margin-top:10px">The dashed eighth note is the twist ending: the mended box plays a new final note, Pepper's, because the home's song now has room for him.</p>
+    </div>
+    <div class="acts">
+      <div class="act"><h4>Act one: The Crack <span>Mon to Tue</span></h4><p>Tutorial in the apartment, then the Lilypad Bazaar and Frostpeak Pantry. Pepper is guilty and showing off; Miso is grumpy and only helping to fix "his mess". First leaks appear: bubbles drifting down the hallway, frost on the kitchen tiles.</p></div>
+      <div class="act"><h4>Act two: The Leaks <span>Wed to Fri</span></h4><p>Inkwell Kingdom, Canopy Hollow and the Spin Cycle Circus. The worlds' residents mention the Hush. Each night a dream cutscene replays one of Miso's memories of Grandma Ines, and Pepper slowly realises what the box means to her. By Friday the living room has gone grey and silent.</p></div>
+      <div class="act"><h4>Act three: The Hush <span>Sat to Sun</span></h4><p>In the Dustlight Caverns the Hush finally attacks. Miso is exhausted, so Pepper has to lead alone and carry her out: the emotional peak and the one stretch where you play only Pepper. Sky Harbor clears the winds, then the finale inside the music box itself.</p></div>
+      <div class="act"><h4>Ending: Second Verse</h4><p>The Homesong plays with an eighth note added. The Thresholds dim to a gentle glow. Noor comes home, winds the box, and finds both cats asleep curled together on the couch. After the credits every world stays open for collectibles and harder "Second Verse" challenges.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="structure">
+  <div class="wrap">
+    <h2>Game structure: a calm hub with doors to busy worlds</h2>
+    <p class="lede">The apartment is the neutral zone: no enemies, no timers, a place to explore, nap and spend treats. Each micro world is a self-contained 25 to 50 minute level with one mission. Each recovered note gives a new ability that opens the next part of the apartment.</p>
+    <div class="loop">
+      <div class="step"><b>Explore</b>Roam the apartment, chat with the other cat, find leaks.</div>
+      <div class="step"><b>Spot a Threshold</b>A glowing object hums with one note of the song.</div>
+      <div class="step"><b>Tumble in</b>A short transition cutscene shrinks the cats into the world.</div>
+      <div class="step"><b>Do the mission</b>Platforming, puzzles, helping the locals, a set-piece finale.</div>
+      <div class="step"><b>Win a note</b>The note returns to the box and grants a new ability.</div>
+      <div class="step"><b>Home changes</b>Colour and music return; the ability opens the next room.</div>
+    </div>
+    <div class="scroll">
+      <table class="stack">
+        <thead><tr><th>#</th><th>Day</th><th>World</th><th>Apartment spot</th><th>Needs</th><th>Note</th><th>Ability earned</th><th>Opens</th></tr></thead>
+        <tbody id="gate"></tbody>
+      </table>
+    </div>
+    <div class="cols3" style="margin-top:28px">
+      <div class="box"><h4>A day in the apartment</h4><ul><li><b>Morning:</b> the neighbor feeds the cats. Bowls restore health; a short story beat plays.</li><li><b>Afternoon:</b> free roam. The new Threshold glows. Optional hub chores and secrets.</li><li><b>Evening:</b> a leak event (snow in the kitchen, ink on the rug) foreshadows the next world.</li><li><b>Night:</b> dream cutscene from Miso's memories. Autosave.</li></ul></div>
+      <div class="box"><h4>Hub features</h4><ul><li><b>Sunbeams:</b> nap spots that save and heal, also used as checkpoints in worlds.</li><li><b>Scratching post shop:</b> spend Fish Treats on collars and cat-bed decor.</li><li><b>The window seat:</b> story recap and the world map.</li><li><b>The Hush meter:</b> grey creeping across rooms shows story progress, never a fail timer.</li></ul></div>
+      <div class="box"><h4>Collectibles per world</h4><ul><li><b>Fish Treats</b> (about 60): currency for cosmetics.</li><li><b>3 Memory Polaroids:</b> unlock extra Grandma Ines memories.</li><li><b>1 Lost Thing:</b> a trinket for the cat bed (a button, a bottle cap).</li><li><b>Second Verse badge:</b> post-game remix of each world's finale.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="band tint" id="missions">
+  <div class="wrap">
+    <h2>Seven worlds, seven missions, one song</h2>
+    <p class="lede">Each world has its own palette, residents and core mechanic, and teaches the ability the next world builds on. The finale asks you to use all of them together.</p>
+    <div class="worlds" id="worlds"></div>
+  </div>
+</section>
+
+<section class="band" id="visuals">
+  <div class="wrap">
+    <h2>Visual components</h2>
+    <p class="lede">Hand-painted flat 2D in layered side view, like a picture book cut out and lit from behind. The apartment uses warm, slightly faded interior colours; each world turns its own palette up to full saturation, so stepping through a Threshold feels like colour switching on.</p>
+    <div class="vis">
+      <div>
+        <div class="phone"><div class="screen" id="screen">
+          <svg class="bg" viewBox="0 0 780 360" preserveAspectRatio="xMidYMid slice" id="shot"></svg>
+          <div class="hud">
+            <div class="ports"><div class="port on" id="p1"></div><div class="port" id="p2"></div><span class="paws">&#9679;&#9679;&#9679;</span></div>
+            <div class="nc">Notes <i class="got"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="fish">Treats 42</div>
+            <div class="talk"><b>Madame Ottilie</b>Everything here is for trade, darling. Nothing is for sale.</div>
+            <div class="joy"></div>
+            <div class="btn bj">Jump</div><div class="btn ba">Paw</div><div class="btn bs">Swap</div><div class="btn bb">Skill</div>
+          </div>
+        </div></div>
+        <p class="caption">Phone HUD mock-up in the Lilypad Bazaar, landscape. Top: active cat (gold ring), three paw health, note tracker, treats. Bottom: floating joystick, Jump, Paw (interact, pounce), Swap and the current ability. All touch targets at least 48pt, placed outside the iOS and Android safe areas.</p>
+      </div>
+      <div>
+        <h3 style="margin-bottom:10px">Art direction rules</h3>
+        <ul style="padding-left:18px;margin:0 0 16px">
+          <li>Five parallax layers per scene: far sky, mid set, play layer, near props, foreground silhouettes.</li>
+          <li>Cats are always the brightest, cleanest shapes on screen, with a thin warm outline so they read on any background.</li>
+          <li>Thresholds always use the same warm gold glow and hum, so players learn to spot them.</li>
+          <li>The Hush is the only grey in the game: desaturated fog that eats colour, with soft static at its edges.</li>
+          <li>Residents are small household creatures matched to their world: frogs and otters in water, frostlings in ice, paper folk in books.</li>
+          <li>Round shapes everywhere, no sharp hazards; danger is shown with jitter and colour loss, never blood.</li>
+        </ul>
+        <h3 style="margin-bottom:6px">Type</h3>
+        <p><span style="font:600 26px Fredoka,sans-serif">Fredoka</span> for the logo, titles and buttons. <span style="font:700 18px Nunito,sans-serif">Nunito</span> for dialogue and menus. Dialogue at no less than 18pt on phones.</p>
+        <h3 style="margin-bottom:6px">Sound</h3>
+        <p>Every world's music is built on its note of the Homesong, so the tune becomes familiar as you collect it. Pepper's sounds are chirps and thumps; Miso's are low purrs and a raspy meow.</p>
+      </div>
+    </div>
+    <h3 style="margin-top:34px">Core palette</h3>
+    <div class="pal" id="pal"></div>
+    <h3 style="margin-top:34px;margin-bottom:10px">Controls</h3>
+    <div class="scroll">
+      <table class="stack">
+        <thead><tr><th>Action</th><th>Mobile (touch)</th><th>Desktop keyboard</th><th>Gamepad</th></tr></thead>
+        <tbody>
+          <tr><td data-l="Action">Move</td><td data-l="Mobile">Floating joystick, left half</td><td data-l="Keyboard">A, D or arrows</td><td data-l="Gamepad">Left stick</td></tr>
+          <tr><td data-l="Action">Jump, wall kick</td><td data-l="Mobile">Jump button</td><td data-l="Keyboard">Space</td><td data-l="Gamepad">A / Cross</td></tr>
+          <tr><td data-l="Action">Interact, pounce, push</td><td data-l="Mobile">Paw button</td><td data-l="Keyboard">E</td><td data-l="Gamepad">X / Square</td></tr>
+          <tr><td data-l="Action">Swap cats</td><td data-l="Mobile">Swap button or tap portrait</td><td data-l="Keyboard">Tab</td><td data-l="Gamepad">Y / Triangle</td></tr>
+          <tr><td data-l="Action">Use ability</td><td data-l="Mobile">Skill button</td><td data-l="Keyboard">Shift</td><td data-l="Gamepad">Right trigger</td></tr>
+          <tr><td data-l="Action">Whisker Sense, Calm Purr</td><td data-l="Mobile">Hold Paw (Miso)</td><td data-l="Keyboard">Hold E</td><td data-l="Gamepad">Hold X</td></tr>
+          <tr><td data-l="Action">Co-op player 2</td><td data-l="Mobile">Not planned</td><td data-l="Keyboard">Second keyboard half</td><td data-l="Gamepad">Second controller</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="band tint" id="tech">
+  <div class="wrap">
+    <h2>Technical setup: mobile first, desktop ready</h2>
+    <div class="story">
+      <div>
+        <p><b>Recommended engine: Godot 4 (GDScript).</b> Free and open source, strong 2D tools, and one project exports to iOS, Android, Windows, macOS and Linux. Unity is a fine alternative if the team already knows it.</p>
+        <ul style="padding-left:18px">
+          <li><b>Resolution:</b> 1920 x 1080 base, scaled with the "expand" aspect mode so tall phones show more sky, never cropped play space.</li>
+          <li><b>Performance target:</b> 60 fps on mid-range phones from about 2021, 30 fps floor; sprite atlases per world, streamed when you step through a Threshold.</li>
+          <li><b>Input layer:</b> one action map (move, jump, paw, swap, skill) bound to touch, keyboard and gamepad, so the desktop port is mostly binding work.</li>
+          <li><b>Save:</b> local JSON save at every Sunbeam and night; cloud saves through the platform stores later.</li>
+          <li><b>Accessibility:</b> remappable controls, hold-or-toggle options, colour-blind safe Threshold glow (shape plus colour), subtitles on every line, an assist mode with extra health and slower chases.</li>
+          <li><b>Monetisation suggestion:</b> premium (one price, no ads), with an optional free first world as a demo.</li>
+        </ul>
+        <h3 style="margin:22px 0 6px">Roadmap (estimates)</h3>
+        <div class="road">
+          <div><b>Pre-production</b><span>Lock this design, greybox the apartment hub, prototype cat swapping and the two movesets.</span></div>
+          <div><b>Vertical slice</b><span>Bathroom and kitchen in the hub plus the full Lilypad Bazaar, at final art quality, on a real phone.</span></div>
+          <div><b>Production 1</b><span>Frostpeak Pantry, Inkwell Kingdom, Canopy Hollow; dream cutscenes for acts one and two.</span></div>
+          <div><b>Production 2</b><span>Spin Cycle Circus, Dustlight Caverns, Sky Harbor, the Music Box Ballroom finale.</span></div>
+          <div><b>Mobile launch</b><span>Touch polish, device testing, store pages, soft launch.</span></div>
+          <div><b>Desktop port</b><span>Keyboard and gamepad, local co-op, higher-resolution art, Steam release.</span></div>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:8px">Project folders</h3>
+<pre class="tree">whisker-worlds/
+  project.godot
+  assets/
+    cats/miso/       sprites, anims
+    cats/pepper/
+    hub/             apartment rooms
+    worlds/
+      w1_lilypad/ ... w7_sky_harbor/
+      finale_music_box/
+    ui/  audio/  fonts/
+  scenes/
+    hub/Apartment.tscn
+    worlds/W1_Lilypad.tscn ...
+    cutscenes/
+  scripts/
+    cats/CatBase.gd
+    cats/Miso.gd  Pepper.gd
+    core/GameState.gd
+    core/SaveSystem.gd
+    core/InputMap.gd
+    world/Threshold.gd
+    world/Mission.gd
+    world/HushFog.gd
+    ui/Hud.gd  Dialogue.gd
+  data/
+    worlds.json    missions
+    dialogue/      per world
+  export/  ios  android  desktop</pre>
+        <p class="small" style="margin-top:10px"><b>Key systems:</b> CatBase holds shared movement; Miso and Pepper add their abilities. GameState tracks notes, abilities and the current day. Threshold loads a world and returns the cats to the same spot. Mission reads its steps from worlds.json so writers can tune missions without code.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+{
+const W=[
+ {n:1,day:'Monday',note:'Do',name:'Lilypad Bazaar',spot:'Bathtub',room:'Bathroom',x:52,y:44,c:['#1fb0ab','#ff7a59','#7cc26a','#8a5a3c'],cn:['Canal aqua','Lantern coral','Lily green','Teak'],
+  entry:'Pepper leaps for a floating rubber duck and slips into the bubble bath. Both cats surface on a lily pad the size of a dinner plate.',
+  world:'A canal market built on giant lily pads and bath-toy boats. Merchant frogs trade under paper lanterns, rubber-duck ferries chug between stalls and soap bubbles drift up like slow balloons.',
+  mission:'The Coin That Sang',goal:'The first note was mistaken for a singing coin, and Baron Croak, a collector toad, has put it up for auction. Nothing in the Bazaar is sold, only traded, so the cats must barter their way up to something the Baron wants.',
+  steps:['Meet Madame Ottilie, the otter grocer, and learn the rule: everything is for trade, nothing is for sale.','Work a five-stall barter chain: soap pearl, snail polish, lantern wick, canal map, golden fly.','Hop across moving duck ferries to catch the Baron before his boat leaves.','Win the auction with the golden fly, then use Calm Purr to end the Baron\'s tantrum.'],
+  mech:'Moving-platform hopping, barter chain, swap tutorial',lead:'Both cats (tutorial)',npc:'Madame Ottilie, Baron Croak, the Duck Ferryman',ab:'Bubble Hop',abd:'ride rising soap bubbles up to high ledges',needs:'Start of game',opens:'Kitchen counter and the freezer'},
+ {n:2,day:'Tuesday',note:'Re',name:'Frostpeak Pantry',spot:'Freezer',room:'Kitchen',x:86,y:68,c:['#5aa3d9','#d94a7a','#bfe6ff','#2f5d8a'],cn:['Glacier blue','Frozen berry','Frost','Deep ice'],
+  entry:'Cold mist curls under the freezer door. Pepper bubble-hops up the counter and paws it open; the cats slide out onto a mountain of ice cubes.',
+  world:'Peaks of ice cubes, frozen-pea boulders and an ice-cream tub castle, home of the Frostlings: small, round, furry snow folk who travel by sled.',
+  mission:'The Long Thaw',goal:'The note froze inside the Great Glacier, an ancient forgotten ice tray. Its warmth is melting the Frostling village from below, so the cats must free it and carry it out before the village floods.',
+  steps:['Help Elder Rime\'s sled caravan cross the cracking pea fields.','Solve slide puzzles on sheet ice: you slide until something stops you.','Shoulder Push frozen boulders to build a path to the Glacier\'s heart.','Escape with the glowing note in a downhill chase as the ice melts behind you.'],
+  mech:'Ice sliding puzzles, pushing blocks, escape chase',lead:'Miso pushes, Pepper scouts',npc:'Elder Rime, the Frostling sled team',ab:'Ice Claws',abd:'grip and climb slick vertical surfaces',needs:'Bubble Hop',opens:'The polished bookshelf in the living room'},
+ {n:3,day:'Wednesday',note:'Mi',name:'Inkwell Kingdom',spot:'Bookshelf',room:'Living room',x:40,y:73,c:['#e2483d','#e8b931','#f4e6c4','#23233a'],cn:['Vermilion','Gilt','Parchment','Ink'],
+  entry:'Pepper claws up the shelf and knocks down a fairy-tale book. It falls open and the cats tumble into its pages.',
+  world:'An origami kingdom: folded paper castles, rivers of ink and residents who are paper folk with words printed on their sides. Pages turn like weather.',
+  mission:'The Missing Ending',goal:'Ink Moths are eating the kingdom\'s story, and the note became the bell that rings at the end of every chapter. Queen Folio cannot finish her story, so her kingdom is stuck repeating the same day.',
+  steps:['Sneak through the margins, hiding in the shadows of giant letters from moth patrols.','Collect torn page scraps; each one flips a page and rearranges the platforms.','Use Whisker Sense to find hidden words that open secret folds.','Chase the Moth Matriarch up the book\'s spine and ring the bell to end the chapter.'],
+  mech:'Light stealth, page-flip level shifting',lead:'Miso (stealth and sense)',npc:'Queen Folio, Sir Dogear, the Moth Matriarch',ab:'Paper Glide',abd:'glide short distances on a folded paper crane',needs:'Ice Claws',opens:'A glide from the shelf to the study plant'},
+ {n:4,day:'Thursday',note:'Fa',name:'Canopy Hollow',spot:'Monstera plant',room:'Study',x:28.5,y:76,c:['#2f8f4e','#ff8fb1','#ffe873','#5b3a29'],cn:['Leaf','Petal pink','Firefly','Bark'],
+  entry:'A tiny firefly blinks out of the plant pot. Both cats chase it under a leaf and the plant grows to the size of a rainforest.',
+  world:'A bug jungle in a flowerpot: snail trams on vine rails, beetle guards in seed-pod helmets and towers made of flower stalks.',
+  mission:'Festival of Small Lights',goal:'The note fell deep into the roots, and without its hum the fireflies cannot glow. The Glow Festival starts at nightfall, so the cats must reach the roots and bring back the light.',
+  steps:['Swing and climb up the canopy on vines to meet Queen Lumen of the fireflies.','Escort a snail tram through a valley blocked by a sulky caterpillar.','Descend into the dark roots, guided by the last firefly still glowing.','Calm Old Grub, a grumpy mole cricket guarding the note, and light the festival.'],
+  mech:'Vine swinging, escort, darkness with a light guide',lead:'Pepper climbs, Miso calms',npc:'Queen Lumen, Shelby the tram snail, Old Grub',ab:'Firefly Lantern',abd:'a firefly companion that lights dark places',needs:'Paper Glide',opens:'The dark laundry closet'},
+ {n:5,day:'Friday',note:'Sol',name:'Spin Cycle Circus',spot:'Dryer',room:'Laundry closet',x:83.2,y:47.8,c:['#e63946','#ffc93c','#b9a6e3','#6c7a89'],cn:['Big top red','Sock yellow','Lint lavender','Steel'],
+  entry:'The dryer\'s round window glows warm. Pepper climbs into the fresh laundry for a nap, Miso climbs in after him, and the drum starts to turn.',
+  world:'A circus inside a spinning drum, run by all the socks that ever went missing. Gravity rotates as the drum turns, so floors become walls.',
+  mission:'The Lost Sock Spectacular',goal:'Ringmaster Argyle\'s big show has lost its star: the note became the chime on the trapeze bar. Without it the show is cancelled forever, and the socks will scatter.',
+  steps:['Learn the drum: rooms rotate on a beat, and you move between turns.','Rehearse with the acrobat socks: trapeze timing and Boost jumps off Miso.','Find the chime in the lint caverns at the bottom of the drum.','Perform the finale live, a rhythm sequence where both cats fly through the big top.'],
+  mech:'Rotating gravity, rhythm timing, co-op Boost',lead:'Both cats (co-op)',npc:'Ringmaster Argyle, the Tube Sock Twins, Lint Lady',ab:'Spin Dash',abd:'a rolling dash that bumps open heavy doors',needs:'Firefly Lantern',opens:'The heavy bedroom door'},
+ {n:6,day:'Saturday',note:'La',name:'Dustlight Caverns',spot:'Under the bed',room:'Bedroom',x:25,y:53.5,c:['#46e0c8','#ff9f43','#1d1b3a','#9a96a8'],cn:['Crystal teal','Ember','Midnight','Dust'],
+  entry:'The bedroom is dim and grey. A dust bunny hops under the bed, and the cats crawl after it into the dark.',
+  world:'Caverns where lost things go: stalagmites of buttons and bobby pins, a lake made from a lost marble, glittering crystal veins and shy dust bunnies.',
+  mission:'Where Lost Things Go',goal:'This is the Hush\'s lair. It is swallowing the note to grow strong enough to fill the whole apartment. The cats must reach the note before it is gone.',
+  steps:['Light the way with the Firefly Lantern and befriend the dust bunnies.','Cross the Marble Lake on drifting lost things.','Survive the Hush\'s first attack; Miso is drained and can barely walk.','Play only Pepper: carry Miso on his back and climb out with the note.'],
+  mech:'Light and shadow, escort, solo Pepper sequence',lead:'Pepper alone (story peak)',npc:'Pip the dust bunny, the Hush',ab:'Echo Meow',abd:'a meow that reveals invisible paths and breaks Hush fog',needs:'Spin Dash',opens:'The fogged bay window'},
+ {n:7,day:'Sunday',note:'Ti',name:'Sky Harbor',spot:'Bay window',room:'Living room',x:65,y:72,c:['#8ecae6','#ffb38a','#5e548e','#c9a227'],cn:['Sky','Sunset peach','Skyline violet','Brass'],
+  entry:'The window is fogged grey. Echo Meow clears a paw-shaped hole, a pigeon taps the glass, and the cats step through their own reflection.',
+  world:'Pigeon airships docked on cloud piers, high above a miniature Lumen City. Wind lanes are marked with streamers and brass weather vanes.',
+  mission:'The Last Ferry Home',goal:'The Hush has smothered the winds and grounded Captain Coo\'s fleet. The note is the harbor\'s foghorn, buried in the fog bank. Without wind, nothing flies.',
+  steps:['Repair the dock\'s weather vanes so the wind lanes return.','Glide between cloud piers on drafts, collecting fleet streamers.','Echo Meow through the fog bank to find the foghorn.','Ride the convoy race home through the skyline as the fog breaks.'],
+  mech:'Gliding on wind lanes, flight race',lead:'Both cats',npc:'Captain Coo, First Mate Gristle the gull',ab:'Wind Whiskers',abd:'ride updrafts higher than any jump',needs:'Echo Meow',opens:'The top of the mantel and the music box'},
+ {n:8,day:'Sunday night',note:'All',name:'Music Box Ballroom',spot:'Music box',room:'Living room',x:53.1,y:77.3,c:['#c9a227','#e8792f','#3b3350','#f6efe6'],cn:['Old gold','Calico orange','Velvet plum','Ivory'],finale:true,
+  entry:'With all seven notes back, the cats ride an updraft to the mantel. The lid creaks open and they shrink into the box.',
+  world:'A clockwork ballroom of brass gears, a turning dance floor and seven dark chandeliers, one for each note. The Hush has grown to fill the dome.',
+  mission:'The Homesong',goal:'Light every chandelier and play the Homesong to drive the Hush out of the apartment for good.',
+  steps:['Cross the turning gear floor, using every ability you have earned.','Light the seven chandeliers in order, each with its world\'s ability.','Duet: a call-and-response rhythm where Miso purrs and Pepper meows the melody.','The song finds an eighth note. Pepper\'s note completes the box.'],
+  mech:'All abilities, rhythm finale',lead:'Both cats',npc:'The Hush, the memory of Grandma Ines',ab:'Ending',abd:'credits, then Second Verse challenges',needs:'All seven notes',opens:'Post-game: every world reopens'}
+];
+const $=s=>document.querySelector(s);
+
+function cat(id,k){
+ const m=k==='miso';
+ const base=m?'#fbf6ee':'#ffffff',g='#8e97a4',o='#e8792f',b='#2b2522';
+ const tail=m?o:g, eye=m?'#d9a21b':'#4fb7bd';
+ const pat=m
+  ?`<ellipse cx="30" cy="36" rx="14" ry="16" fill="${o}"/><ellipse cx="58" cy="24" rx="11" ry="9" fill="${b}"/><ellipse cx="72" cy="72" rx="18" ry="20" fill="${b}"/><ellipse cx="64" cy="102" rx="16" ry="12" fill="${o}"/><ellipse cx="80" cy="92" rx="8" ry="10" fill="${o}"/>`
+  :`<ellipse cx="42" cy="24" rx="26" ry="14" fill="${g}"/><ellipse cx="68" cy="74" rx="20" ry="24" fill="${g}"/><path d="M42 24l-4 14 8 0z" fill="${base}"/>`;
+ const e1=m?o:g, e2=m?b:g;
+ return `<defs><clipPath id="${id}c"><ellipse cx="52" cy="86" rx="30" ry="32"/><circle cx="42" cy="42" r="22"/></clipPath></defs>
+ <path d="M72 112C102 114 104 78 90 66" stroke="${tail}" stroke-width="11" fill="none" stroke-linecap="round"/>
+ ${m?'':`<circle cx="90" cy="66" r="5.5" fill="#fff"/>`}
+ <polygon points="22,30 26,4 40,20" fill="${e1}"/><polygon points="46,18 58,4 62,30" fill="${e2}"/>
+ <polygon points="26,24 28,11 35,19" fill="#f4a7b4"/><polygon points="50,19 57,10 58,24" fill="#f4a7b4"/>
+ <g clip-path="url(#${id}c)"><rect x="0" y="0" width="110" height="130" fill="${base}"/>${pat}<ellipse cx="42" cy="90" rx="13" ry="22" fill="#fff"/><ellipse cx="42" cy="52" rx="12" ry="9" fill="#fff"/></g>
+ <ellipse cx="36" cy="116" rx="8" ry="5" fill="#fff" stroke="#e4ddd6" stroke-width="1"/><ellipse cx="52" cy="116" rx="8" ry="5" fill="#fff" stroke="#e4ddd6" stroke-width="1"/>
+ <ellipse cx="34" cy="40" rx="4.2" ry="5.2" fill="${eye}"/><ellipse cx="50" cy="40" rx="4.2" ry="5.2" fill="${eye}"/>
+ <ellipse cx="34" cy="40.5" rx="1.6" ry="3.6" fill="#1c1c1c"/><ellipse cx="50" cy="40.5" rx="1.6" ry="3.6" fill="#1c1c1c"/>
+ <path d="M40 48h4l-2 2.6z" fill="#e98a9a"/>
+ <path d="M38 52q4 3 4 0q0 3 4 0" stroke="#7a6a66" stroke-width="1.2" fill="none"/>
+ <g stroke="#b8aca6" stroke-width=".9"><path d="M30 50L14 47M30 52L15 54M54 50L70 47M54 52L69 54"/></g>`;
+}
+$('#miso').innerHTML=cat('ms','miso');$('#pepper').innerHTML=cat('pp','pepper');
+$('#misoBig').innerHTML=cat('mb','miso');$('#pepperBig').innerHTML=cat('pb','pepper');
+$('#p1').innerHTML=`<svg viewBox="0 0 100 80">${cat('h1','miso')}</svg>`;
+$('#p2').innerHTML=`<svg viewBox="0 0 100 80">${cat('h2','pepper')}</svg>`;
+
+let s=7;const r=()=>(s=s*16807%2147483647)/2147483647;
+let sk1='',sk2='';
+for(let x=0;x<1000;x+=28+r()*30){const h=120+r()*200,w=24+r()*36;sk1+=`<rect x="${x}" y="${640-h-80}" width="${w}" height="${h+80}" fill="#7fb3b0" opacity=".55"/>`}
+for(let x=-10;x<1000;x+=40+r()*40){const h=60+r()*150,w=34+r()*40;sk2+=`<rect x="${x}" y="${640-h}" width="${w}" height="${h}" fill="#3f6f7c"/>`;for(let i=0;i<4;i++)if(r()>.4)sk2+=`<rect x="${x+6+r()*(w-14)}" y="${640-h+10+r()*(h-20)}" width="5" height="7" fill="#ffd9a0"/>`}
+$('#sk1').innerHTML=sk1;$('#sk2').innerHTML=sk2;
+let up='';for(let x=96;x<900;x+=38)up+=`<rect x="${x}" y="40" width="22" height="30" rx="2" fill="${r()>.5?'#ffd9a0':'#5a5072'}"/><rect x="${x}" y="80" width="22" height="30" rx="2" fill="${r()>.6?'#ffd9a0':'#5a5072'}"/>`;
+$('#upper').innerHTML=up;
+const bc=['#e63946','#ffc93c','#5aa3d9','#7cc26a','#f4e6c4','#b9a6e3','#ff8fb1'];let bk='';
+[418,463,508,553].forEach((y,j)=>{let x=362;while(x<438){const w=7+r()*7,h=28+r()*12;if(x+w>440)break;bk+=`<rect x="${x}" y="${y+40-h}" width="${w}" height="${h}" rx="1" fill="${bc[(j*3+Math.floor(r()*7))%7]}"/>`;x+=w+1.5}bk+=`<rect x="355" y="${y+40}" width="92" height="5" fill="#5b3a29"/>`});
+$('#books').innerHTML=bk;
+$('#portals').innerHTML=W.map(w=>`<circle class="glow" cx="${w.x*10}" cy="${w.y*6.4}" r="${w.finale?40:46}" fill="url(#glow)"/>`).join('');
+
+const sc=$('#scene');
+sc.insertAdjacentHTML('beforeend',W.map(w=>`<a class="hot" href="#w${w.n}" style="left:${w.x}%;top:${w.y}%;background:${w.c[0]}" aria-label="${w.n<8?'World '+w.n:'Finale'}: ${w.name}" title="${w.name}">${w.finale?'&#9834;':w.n}</a>`).join(''));
+$('#legend').innerHTML=W.map(w=>`<li><a href="#w${w.n}"><i style="background:${w.c[0]}">${w.finale?'&#9834;':w.n}</i><span>${w.name}<small>${w.spot}, ${w.room.toLowerCase()}</small></span></a></li>`).join('');
+
+$('#staff').innerHTML=W.map((w,i)=>`<div><b class="${w.finale?'open':''}" style="bottom:${10+i*10.5}%;background:${w.c[0]}"></b></div>`).join('');
+$('#notes').innerHTML=W.map(w=>`<div><strong>${w.finale?'Do′':w.note}</strong>${w.finale?'Pepper':w.name.split(' ')[0]}</div>`).join('');
+
+$('#gate').innerHTML=W.map(w=>`<tr><td data-l="#">${w.finale?'F':w.n}</td><td data-l="Day">${w.day}</td><td data-l="World"><span class="dot" style="background:${w.c[0]}"></span><a href="#w${w.n}">${w.name}</a></td><td data-l="Spot">${w.spot}, ${w.room.toLowerCase()}</td><td data-l="Needs">${w.needs}</td><td data-l="Note">${w.note}</td><td data-l="Ability">${w.ab}</td><td data-l="Opens">${w.opens}</td></tr>`).join('');
+
+function art(w){
+ let t=w.n*31;const q=()=>(t=t*16807%2147483647)/2147483647;
+ let bub='';for(let i=0;i<14;i++)bub+=`<circle cx="${q()*400}" cy="${q()*200}" r="${2+q()*7}" fill="${w.c[2]}" opacity="${.35+q()*.5}"/>`;
+ const wave=(y,a,col)=>`<path d="M0 ${y} C80 ${y-a} 140 ${y+a} 220 ${y} S340 ${y-a} 400 ${y} V300 H0Z" fill="${col}"/>`;
+ return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="g${w.n}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${w.c[0]}"/><stop offset="1" stop-color="${w.c[3]}"/></linearGradient></defs><rect width="400" height="300" fill="url(#g${w.n})"/>${bub}${wave(190,26,w.c[1])}<g opacity=".9">${wave(225,18,w.c[3])}</g>${wave(258,14,'rgba(0,0,0,.28)')}</svg>`;
+}
+$('#worlds').innerHTML=W.map(w=>`<article class="world" id="w${w.n}">
+ <div class="wart">${art(w)}<span class="num">${w.finale?'Finale':'World '+w.n} &middot; ${w.day}</span><div><h3>${w.name}</h3><div class="where">Threshold: ${w.spot}, ${w.room.toLowerCase()}</div><div class="sw">${w.c.map((c,i)=>`<span><i style="background:${c}"></i>${w.cn[i]} ${c}</span>`).join('')}</div></div></div>
+ <div class="wbody"><p><b>Getting in.</b> ${w.entry}</p><p><b>The world.</b> ${w.world}</p>
+ <div class="m">Mission: ${w.mission}</div><p>${w.goal}</p><ol>${w.steps.map(x=>`<li>${x}</li>`).join('')}</ol>
+ <div class="meta"><div><b>Core mechanic</b>${w.mech}</div><div><b>Lead cat</b>${w.lead}</div><div><b>Characters</b>${w.npc}</div><div><b>Unlocked by</b>${w.needs}</div>
+ <div class="reward"><b>Reward</b>${w.finale?'The Homesong plays. '+w.abd[0].toUpperCase()+w.abd.slice(1)+'.':`Note ${w.note} + <strong>${w.ab}</strong>: ${w.abd}. Opens ${w.opens.toLowerCase()}.`}</div></div></div></article>`).join('');
+
+const P=[['#e8792f','Calico orange','Miso, UI accent'],['#2b2522','Calico black','Miso, outlines'],['#fbf6ee','Warm white','Miso\'s coat'],['#8e97a4','Pepper grey','Pepper\'s coat'],['#ffffff','Pepper white','Pepper\'s chest'],['#163a46','Twilight teal','Menus, night'],['#ffc49b','Dusk peach','Skies, highlights'],['#ffe27a','Threshold gold','Every doorway'],['#3b3350','Building plum','Hub exterior'],['#9a96a8','Hush grey','The villain only']];
+$('#pal').innerHTML=P.map(p=>`<div><i style="background:${p[0]}"></i><span><b>${p[1]}</b><br>${p[0]} &middot; ${p[2]}</span></div>`).join('');
+
+let sh=`<defs><linearGradient id="ss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f8f8c"/><stop offset="1" stop-color="#9ee0d2"/></linearGradient></defs><rect width="780" height="360" fill="url(#ss)"/>`;
+for(let i=0;i<7;i++){const x=40+i*110;sh+=`<path d="M${x} 40v40" stroke="#5b3a29" stroke-width="2"/><ellipse cx="${x}" cy="92" rx="11" ry="14" fill="#ff7a59"/><ellipse cx="${x}" cy="92" rx="5" ry="9" fill="#ffd19a"/>`}
+sh+=`<rect x="80" y="170" width="170" height="80" rx="6" fill="#8a5a3c"/><path d="M70 170h190l-20-34H90z" fill="#e63946"/><path d="M70 170h190" stroke="#fff" stroke-width="4" stroke-dasharray="14 10"/>`;
+sh+=`<rect x="560" y="160" width="160" height="90" rx="6" fill="#8a5a3c"/><path d="M548 160h184l-18-30H566z" fill="#ffc93c"/>`;
+sh+=`<rect y="270" width="780" height="90" fill="#1a8f99"/><path d="M0 276q40-10 80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0" stroke="#bff0ea" stroke-width="3" fill="none"/>`;
+sh+=`<ellipse cx="330" cy="272" rx="70" ry="13" fill="#7cc26a"/><ellipse cx="500" cy="276" rx="55" ry="11" fill="#7cc26a"/><path d="M455 262q10-30 34-18h20q6 18-12 20z" fill="#ffc93c"/><circle cx="500" cy="244" r="12" fill="#ffc93c"/><path d="M510 244l10 3-10 3z" fill="#ff7a59"/>`;
+sh+=`<g transform="translate(298 214) scale(.5)">${cat('sh','miso')}</g>`;
+sh+=`<g fill="#fff" opacity=".7"><circle cx="420" cy="150" r="10"/><circle cx="440" cy="120" r="6"/><circle cx="600" cy="110" r="8"/></g>`;
+$('#shot').innerHTML=sh;
+}
+</script>
